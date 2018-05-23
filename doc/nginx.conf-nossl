@@ -1,0 +1,8 @@
+#
+
+server {
+	listen 80 default_server;
+
+	include /home/site/go/src/github.com/mephi-ut/hh-api/doc/site.conf;
+}
+
