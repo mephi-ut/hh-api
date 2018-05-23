@@ -3,13 +3,12 @@ package models
 //go:generate reform
 
 import (
-	cfg "github.com/mephi-ut/hh-api/config"
 	db "github.com/mephi-ut/hh-api/db"
 	"github.com/xaionaro/reform"
 )
 
 func init() {
-	cfg.AddReloadHook(Reinit)
+	db.AddConnectHook(Reinit)
 }
 
 type modelI interface {

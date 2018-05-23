@@ -14,6 +14,8 @@ import (
 
 var db *reform.DB
 
+var connectHooks []func()
+
 func init() {
 	cfg.AddReloadHook(Reinit)
 }
@@ -40,13 +42,19 @@ func initDB(params InitDBParams) (db *reform.DB) {
 
 func Init() {
 	db = initDB(InitDBParams{DbCfg: cfg.Get().Db})
+	if db == nil {
+		panic(fmt.Errorf("Cannot connect to DB"))
+	}
+	for _, connectHook := range connectHooks {
+		connectHook()
+	}
 }
 
 func Reinit() {
 	Init()
 }
 
-func Get() (db *reform.DB) {
+func Get() *reform.DB {
 	return db
 }
 
@@ -93,4 +101,8 @@ func setupDb(db *sql.DB, driver string) {
 		db.SetMaxOpenConns(100)
 		break
 	}
+}
+
+func AddConnectHook(hook func()) {
+	connectHooks = append(connectHooks, hook)
 }
