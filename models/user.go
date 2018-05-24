@@ -15,14 +15,16 @@ import (
 
 //reform:users
 type user struct {
-	Id           int    `reform:"id,pk"`
-	Nickname     string `reform:"nickname"`
-	Email        string `reform:"email"`
-	PasswordHash string `reform:"password_hash" sql_size:"255"`
+	Id           int     `reform:"id,pk"`
+	Nickname     string  `reform:"nickname"`
+	Email        *string `reform:"email"`
+	PasswordHash string  `reform:"password_hash" sql_size:"255"`
 }
 
 type UserI interface {
 	GetId() int
+	GetNickname() string
+	GetEmail() *string
 }
 
 var (
@@ -44,6 +46,14 @@ func NewUser() *user {
 
 func (user user) GetId() int {
 	return user.Id
+}
+
+func (user user) GetNickname() string {
+	return user.Nickname
+}
+
+func (user user) GetEmail() *string {
+	return user.Email
 }
 
 func HashPassword(password string) string {

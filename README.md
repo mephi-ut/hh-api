@@ -6,11 +6,12 @@ Just a proof of work (for Debian):
 ```sh
 apt-get update
 apt-get install -y curl apt-transport-https gnupg libc6-dev
+apt-get install curl python-software-properties
+curl -sL https://deb.nodesource.com/setup_10.x | base -
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update
-apt-get install -yt sid nodejs npm
-apt-get install -y golang yarn sudo
+apt-get install -y golang yarn sudo nodejs
 
 useradd -m site
 su -l site <<EOF

@@ -44,7 +44,9 @@ func SignUp(c *gin.Context) {
 	user := m.NewUser()
 	user.Nickname = json.Nickname
 	user.PasswordHash = passwordHash
-	user.Email = json.Email
+	if json.Email != "" {
+		user.Email = &json.Email
+	}
 	err = user.Insert()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Cannot create user (the nickname is already used?)"})
