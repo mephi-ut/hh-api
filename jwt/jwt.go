@@ -8,15 +8,9 @@ import (
 	"time"
 )
 
-var jwt *ginJwt.GinJWTMiddleware
-
-func GetJwtMiddleware() *ginJwt.GinJWTMiddleware {
-	return jwt
-}
-
-func init() {
-	jwt = &ginJwt.GinJWTMiddleware{
-		Realm:      "DXChess",
+func GetJwtMiddleware(unauthorizedFunc func(c *gin.Context, code int, message string)) *ginJwt.GinJWTMiddleware {
+	return &ginJwt.GinJWTMiddleware{
+		Realm:      "HH-IT-MEPHI",
 		Key:        []byte(cfg.Get().Secret),
 		Timeout:    time.Hour,
 		MaxRefresh: time.Hour,
@@ -27,10 +21,10 @@ func init() {
 			return true
 		},
 		Unauthorized: func(c *gin.Context, code int, message string) {
-			c.JSON(code, gin.H{
-				"code":    code,
-				"message": message,
-			})
+			if unauthorizedFunc == nil {
+				return
+			}
+			unauthorizedFunc(c, code, message)
 		},
 		// TokenLookup is a string in the form of "<source>:<name>" that is used
 		// to extract token from the request.

@@ -11,20 +11,25 @@ import (
 	"hash"
 	"strconv"
 	"strings"
+
+	"github.com/xaionaro-go/extime"
 )
 
 //reform:users
 type user struct {
-	Id           int     `reform:"id,pk"`
-	Nickname     string  `reform:"nickname"`
-	Email        *string `reform:"email"`
-	PasswordHash string  `reform:"password_hash" sql_size:"255"`
+	Id           int          `reform:"id,pk"`
+	Nickname     string       `reform:"nickname" sql:"unique_index" sql_size:"255"`
+	Email        *string      `reform:"email" sql_size:"255"`
+	Phone        *string      `reform:"phone" sql_size:"255"`
+	PasswordHash string       `reform:"password_hash" sql_size:"255"`
+	CreatedAt    *extime.Time `reform:"created_at"`
 }
 
 type UserI interface {
 	GetId() int
 	GetNickname() string
 	GetEmail() *string
+	GetPhone() *string
 }
 
 var (
@@ -54,6 +59,10 @@ func (user user) GetNickname() string {
 
 func (user user) GetEmail() *string {
 	return user.Email
+}
+
+func (user user) GetPhone() *string {
+	return user.Phone
 }
 
 func HashPassword(password string) string {

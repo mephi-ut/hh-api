@@ -57,7 +57,7 @@ func (v vacancyTableTypeType) Name() string {
 
 // Columns returns a new slice of column names for that view or table in SQL database.
 func (v vacancyTableTypeType) Columns() []string {
-	return []string{"id"}
+	return []string{"id", "name", "created_at", "closed_at"}
 }
 
 // NewStruct makes a new struct for that view or table.
@@ -92,7 +92,7 @@ func (v vacancyTableTypeType) StructInfo() reform.StructInfo {
 
 // vacancyTable represents vacancies view or table in SQL database.
 var vacancyTable = &vacancyTableTypeType{
-	s: reform.StructInfo{Type: "vacancy", SQLSchema: "", SQLName: "vacancies", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "vacancy", SQLSchema: "", SQLName: "vacancies", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Name", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "name", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "ClosedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "closed_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(vacancy).Values(),
 }
 
@@ -110,7 +110,7 @@ func (v *vacancyTableTypeType_log) Name() string {
 }
 
 func (v *vacancyTableTypeType_log) Columns() []string {
-	return []string{"id", "log_author", "log_action", "log_date", "log_comment"}
+	return []string{"id", "name", "created_at", "closed_at", "log_author", "log_action", "log_date", "log_comment"}
 }
 
 func (v *vacancyTableTypeType_log) NewStruct() reform.Struct {
@@ -130,7 +130,7 @@ func (v *vacancyTableTypeType_log) PKColumnIndex() uint {
 }
 
 var vacancyTableLogRow = &vacancyTableTypeType_log{
-	s: reform.StructInfo{Type: "vacancy", SQLSchema: "", SQLName: "vacancies_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "vacancy", SQLSchema: "", SQLName: "vacancies_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Name", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "name", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "ClosedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "closed_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(vacancyLogRow).Values(),
 }
 
@@ -138,6 +138,12 @@ func (s vacancyTableTypeType) ColumnNameByFieldName(fieldName string) string {
 	switch fieldName {
 	case "Id":
 		return "id"
+	case "Name":
+		return "name"
+	case "CreatedAt":
+		return "created_at"
+	case "ClosedAt":
+		return "closed_at"
 	}
 	return ""
 }
@@ -146,6 +152,12 @@ func (s vacancyTableTypeType_log) ColumnNameByFieldName(fieldName string) string
 	switch fieldName {
 	case "Id":
 		return "id"
+	case "Name":
+		return "name"
+	case "CreatedAt":
+		return "created_at"
+	case "ClosedAt":
+		return "closed_at"
 	case "LogAuthor":
 		return "log_author"
 	case "LogAction":
@@ -194,6 +206,12 @@ func (s *vacancy) FieldPointerByName(fieldName string) interface{} {
 	switch fieldName {
 	case "Id":
 		return &s.Id
+	case "Name":
+		return &s.Name
+	case "CreatedAt":
+		return &s.CreatedAt
+	case "ClosedAt":
+		return &s.ClosedAt
 	}
 
 	return nil
@@ -203,6 +221,12 @@ func (s *vacancyLogRow) FieldPointerByName(fieldName string) interface{} {
 	switch fieldName {
 	case "Id":
 		return &s.Id
+	case "Name":
+		return &s.Name
+	case "CreatedAt":
+		return &s.CreatedAt
+	case "ClosedAt":
+		return &s.ClosedAt
 	case "LogAuthor":
 		return &s.LogAuthor
 	case "LogAction":
@@ -218,17 +242,23 @@ func (s *vacancyLogRow) FieldPointerByName(fieldName string) interface{} {
 
 // String returns a string representation of this struct or record.
 func (s vacancy) String() string {
-	res := make([]string, 1)
+	res := make([]string, 4)
 	res[0] = "Id: " + reform.Inspect(s.Id, true)
+	res[1] = "Name: " + reform.Inspect(s.Name, true)
+	res[2] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
+	res[3] = "ClosedAt: " + reform.Inspect(s.ClosedAt, true)
 	return strings.Join(res, ", ")
 }
 func (s vacancyLogRow) String() string {
-	res := make([]string, 5)
+	res := make([]string, 8)
 	res[0] = "Id: " + reform.Inspect(s.Id, true)
-	res[1] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
-	res[2] = "LogAction: " + reform.Inspect(s.LogAction, true)
-	res[3] = "LogDate: " + reform.Inspect(s.LogDate, true)
-	res[4] = "LogComment: " + reform.Inspect(s.LogComment, true)
+	res[1] = "Name: " + reform.Inspect(s.Name, true)
+	res[2] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
+	res[3] = "ClosedAt: " + reform.Inspect(s.ClosedAt, true)
+	res[4] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
+	res[5] = "LogAction: " + reform.Inspect(s.LogAction, true)
+	res[6] = "LogDate: " + reform.Inspect(s.LogDate, true)
+	res[7] = "LogComment: " + reform.Inspect(s.LogComment, true)
 	return strings.Join(res, ", ")
 }
 
@@ -237,6 +267,9 @@ func (s vacancyLogRow) String() string {
 func (s *vacancy) Values() []interface{} {
 	return []interface{}{
 		s.Id,
+		s.Name,
+		s.CreatedAt,
+		s.ClosedAt,
 	}
 }
 func (s *vacancyLogRow) Values() []interface{} {
@@ -253,6 +286,9 @@ func (s *vacancyLogRow) Values() []interface{} {
 func (s *vacancy) Pointers() []interface{} {
 	return []interface{}{
 		&s.Id,
+		&s.Name,
+		&s.CreatedAt,
+		&s.ClosedAt,
 	}
 }
 func (s *vacancyLogRow) Pointers() []interface{} {

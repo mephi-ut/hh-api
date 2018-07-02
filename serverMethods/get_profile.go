@@ -5,12 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Whoami(c *gin.Context) {
+func GetProfile(c *gin.Context) {
 	me := helpers.GetMe(c)
 
 	c.JSON(200, gin.H{
 		"UserId":   me.GetId(),
 		"Nickname": me.GetNickname(),
 		"Email":    me.GetEmail(),
+		"Phone":    me.GetPhone(),
 	})
 }

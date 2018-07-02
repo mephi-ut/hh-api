@@ -57,7 +57,7 @@ func (v userTableTypeType) Name() string {
 
 // Columns returns a new slice of column names for that view or table in SQL database.
 func (v userTableTypeType) Columns() []string {
-	return []string{"id", "nickname", "email", "password_hash"}
+	return []string{"id", "nickname", "email", "phone", "password_hash", "created_at"}
 }
 
 // NewStruct makes a new struct for that view or table.
@@ -92,7 +92,7 @@ func (v userTableTypeType) StructInfo() reform.StructInfo {
 
 // userTable represents users view or table in SQL database.
 var userTable = &userTableTypeType{
-	s: reform.StructInfo{Type: "user", SQLSchema: "", SQLName: "users", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Nickname", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "nickname", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "PasswordHash", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "password_hash", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "user", SQLSchema: "", SQLName: "users", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Nickname", IsPK: false, IsUnique: true, HasIndex: false, Type: "string", Column: "nickname", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Phone", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "phone", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "PasswordHash", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "password_hash", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(user).Values(),
 }
 
@@ -110,7 +110,7 @@ func (v *userTableTypeType_log) Name() string {
 }
 
 func (v *userTableTypeType_log) Columns() []string {
-	return []string{"id", "nickname", "email", "password_hash", "log_author", "log_action", "log_date", "log_comment"}
+	return []string{"id", "nickname", "email", "phone", "password_hash", "created_at", "log_author", "log_action", "log_date", "log_comment"}
 }
 
 func (v *userTableTypeType_log) NewStruct() reform.Struct {
@@ -130,7 +130,7 @@ func (v *userTableTypeType_log) PKColumnIndex() uint {
 }
 
 var userTableLogRow = &userTableTypeType_log{
-	s: reform.StructInfo{Type: "user", SQLSchema: "", SQLName: "users_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Nickname", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "nickname", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "PasswordHash", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "password_hash", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "user", SQLSchema: "", SQLName: "users_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Nickname", IsPK: false, IsUnique: true, HasIndex: false, Type: "string", Column: "nickname", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Phone", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "phone", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "PasswordHash", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "password_hash", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(userLogRow).Values(),
 }
 
@@ -142,8 +142,12 @@ func (s userTableTypeType) ColumnNameByFieldName(fieldName string) string {
 		return "nickname"
 	case "Email":
 		return "email"
+	case "Phone":
+		return "phone"
 	case "PasswordHash":
 		return "password_hash"
+	case "CreatedAt":
+		return "created_at"
 	}
 	return ""
 }
@@ -156,8 +160,12 @@ func (s userTableTypeType_log) ColumnNameByFieldName(fieldName string) string {
 		return "nickname"
 	case "Email":
 		return "email"
+	case "Phone":
+		return "phone"
 	case "PasswordHash":
 		return "password_hash"
+	case "CreatedAt":
+		return "created_at"
 	case "LogAuthor":
 		return "log_author"
 	case "LogAction":
@@ -210,8 +218,12 @@ func (s *user) FieldPointerByName(fieldName string) interface{} {
 		return &s.Nickname
 	case "Email":
 		return &s.Email
+	case "Phone":
+		return &s.Phone
 	case "PasswordHash":
 		return &s.PasswordHash
+	case "CreatedAt":
+		return &s.CreatedAt
 	}
 
 	return nil
@@ -225,8 +237,12 @@ func (s *userLogRow) FieldPointerByName(fieldName string) interface{} {
 		return &s.Nickname
 	case "Email":
 		return &s.Email
+	case "Phone":
+		return &s.Phone
 	case "PasswordHash":
 		return &s.PasswordHash
+	case "CreatedAt":
+		return &s.CreatedAt
 	case "LogAuthor":
 		return &s.LogAuthor
 	case "LogAction":
@@ -242,23 +258,27 @@ func (s *userLogRow) FieldPointerByName(fieldName string) interface{} {
 
 // String returns a string representation of this struct or record.
 func (s user) String() string {
-	res := make([]string, 4)
+	res := make([]string, 6)
 	res[0] = "Id: " + reform.Inspect(s.Id, true)
 	res[1] = "Nickname: " + reform.Inspect(s.Nickname, true)
 	res[2] = "Email: " + reform.Inspect(s.Email, true)
-	res[3] = "PasswordHash: " + reform.Inspect(s.PasswordHash, true)
+	res[3] = "Phone: " + reform.Inspect(s.Phone, true)
+	res[4] = "PasswordHash: " + reform.Inspect(s.PasswordHash, true)
+	res[5] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
 	return strings.Join(res, ", ")
 }
 func (s userLogRow) String() string {
-	res := make([]string, 8)
+	res := make([]string, 10)
 	res[0] = "Id: " + reform.Inspect(s.Id, true)
 	res[1] = "Nickname: " + reform.Inspect(s.Nickname, true)
 	res[2] = "Email: " + reform.Inspect(s.Email, true)
-	res[3] = "PasswordHash: " + reform.Inspect(s.PasswordHash, true)
-	res[4] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
-	res[5] = "LogAction: " + reform.Inspect(s.LogAction, true)
-	res[6] = "LogDate: " + reform.Inspect(s.LogDate, true)
-	res[7] = "LogComment: " + reform.Inspect(s.LogComment, true)
+	res[3] = "Phone: " + reform.Inspect(s.Phone, true)
+	res[4] = "PasswordHash: " + reform.Inspect(s.PasswordHash, true)
+	res[5] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
+	res[6] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
+	res[7] = "LogAction: " + reform.Inspect(s.LogAction, true)
+	res[8] = "LogDate: " + reform.Inspect(s.LogDate, true)
+	res[9] = "LogComment: " + reform.Inspect(s.LogComment, true)
 	return strings.Join(res, ", ")
 }
 
@@ -269,7 +289,9 @@ func (s *user) Values() []interface{} {
 		s.Id,
 		s.Nickname,
 		s.Email,
+		s.Phone,
 		s.PasswordHash,
+		s.CreatedAt,
 	}
 }
 func (s *userLogRow) Values() []interface{} {
@@ -288,7 +310,9 @@ func (s *user) Pointers() []interface{} {
 		&s.Id,
 		&s.Nickname,
 		&s.Email,
+		&s.Phone,
 		&s.PasswordHash,
+		&s.CreatedAt,
 	}
 }
 func (s *userLogRow) Pointers() []interface{} {

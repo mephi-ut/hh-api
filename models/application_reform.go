@@ -57,7 +57,7 @@ func (v applicationTableTypeType) Name() string {
 
 // Columns returns a new slice of column names for that view or table in SQL database.
 func (v applicationTableTypeType) Columns() []string {
-	return []string{"id", "user_id", "vacancy_id", "salary", "employment"}
+	return []string{"id", "user_id", "vacancy_id", "salary", "employment", "answers", "email", "phone", "created_at"}
 }
 
 // NewStruct makes a new struct for that view or table.
@@ -92,7 +92,7 @@ func (v applicationTableTypeType) StructInfo() reform.StructInfo {
 
 // applicationTable represents applications view or table in SQL database.
 var applicationTable = &applicationTableTypeType{
-	s: reform.StructInfo{Type: "application", SQLSchema: "", SQLName: "applications", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "UserId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "user_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "VacancyId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "vacancy_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Salary", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "salary", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Employment", IsPK: false, IsUnique: false, HasIndex: false, Type: "float32", Column: "employment", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "application", SQLSchema: "", SQLName: "applications", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "UserId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "user_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "VacancyId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "vacancy_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Salary", IsPK: false, IsUnique: false, HasIndex: false, Type: "*int", Column: "salary", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Employment", IsPK: false, IsUnique: false, HasIndex: false, Type: "float32", Column: "employment", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Answers", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "answers", FieldsPath: []reform.FieldInfo{}, SQLSize: 1048576, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Phone", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "phone", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(application).Values(),
 }
 
@@ -110,7 +110,7 @@ func (v *applicationTableTypeType_log) Name() string {
 }
 
 func (v *applicationTableTypeType_log) Columns() []string {
-	return []string{"id", "user_id", "vacancy_id", "salary", "employment", "log_author", "log_action", "log_date", "log_comment"}
+	return []string{"id", "user_id", "vacancy_id", "salary", "employment", "answers", "email", "phone", "created_at", "log_author", "log_action", "log_date", "log_comment"}
 }
 
 func (v *applicationTableTypeType_log) NewStruct() reform.Struct {
@@ -130,7 +130,7 @@ func (v *applicationTableTypeType_log) PKColumnIndex() uint {
 }
 
 var applicationTableLogRow = &applicationTableTypeType_log{
-	s: reform.StructInfo{Type: "application", SQLSchema: "", SQLName: "applications_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "UserId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "user_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "VacancyId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "vacancy_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Salary", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "salary", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Employment", IsPK: false, IsUnique: false, HasIndex: false, Type: "float32", Column: "employment", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
+	s: reform.StructInfo{Type: "application", SQLSchema: "", SQLName: "applications_log", Fields: []reform.FieldInfo{{Name: "Id", IsPK: true, IsUnique: false, HasIndex: false, Type: "int", Column: "id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "UserId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "user_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "VacancyId", IsPK: false, IsUnique: false, HasIndex: false, Type: "int", Column: "vacancy_id", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Salary", IsPK: false, IsUnique: false, HasIndex: false, Type: "*int", Column: "salary", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Employment", IsPK: false, IsUnique: false, HasIndex: false, Type: "float32", Column: "employment", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "Answers", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "answers", FieldsPath: []reform.FieldInfo{}, SQLSize: 1048576, Embedded: "", StructFile: ""}, {Name: "Email", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "email", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "Phone", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "phone", FieldsPath: []reform.FieldInfo{}, SQLSize: 255, Embedded: "", StructFile: ""}, {Name: "CreatedAt", IsPK: false, IsUnique: false, HasIndex: false, Type: "*extime.Time", Column: "created_at", FieldsPath: []reform.FieldInfo{}, SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAuthor", IsPK: false, IsUnique: false, HasIndex: false, Type: "*string", Column: "log_author", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogAction", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_action", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogDate", IsPK: false, IsUnique: false, HasIndex: false, Type: "time.Time", Column: "log_date", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}, {Name: "LogComment", IsPK: false, IsUnique: false, HasIndex: false, Type: "string", Column: "log_comment", FieldsPath: []reform.FieldInfo(nil), SQLSize: 0, Embedded: "", StructFile: ""}}, PKFieldIndex: 0, ImitateGorm: false, SkipMethodOrder: false},
 	z: new(applicationLogRow).Values(),
 }
 
@@ -146,6 +146,14 @@ func (s applicationTableTypeType) ColumnNameByFieldName(fieldName string) string
 		return "salary"
 	case "Employment":
 		return "employment"
+	case "Answers":
+		return "answers"
+	case "Email":
+		return "email"
+	case "Phone":
+		return "phone"
+	case "CreatedAt":
+		return "created_at"
 	}
 	return ""
 }
@@ -162,6 +170,14 @@ func (s applicationTableTypeType_log) ColumnNameByFieldName(fieldName string) st
 		return "salary"
 	case "Employment":
 		return "employment"
+	case "Answers":
+		return "answers"
+	case "Email":
+		return "email"
+	case "Phone":
+		return "phone"
+	case "CreatedAt":
+		return "created_at"
 	case "LogAuthor":
 		return "log_author"
 	case "LogAction":
@@ -218,6 +234,14 @@ func (s *application) FieldPointerByName(fieldName string) interface{} {
 		return &s.Salary
 	case "Employment":
 		return &s.Employment
+	case "Answers":
+		return &s.Answers
+	case "Email":
+		return &s.Email
+	case "Phone":
+		return &s.Phone
+	case "CreatedAt":
+		return &s.CreatedAt
 	}
 
 	return nil
@@ -235,6 +259,14 @@ func (s *applicationLogRow) FieldPointerByName(fieldName string) interface{} {
 		return &s.Salary
 	case "Employment":
 		return &s.Employment
+	case "Answers":
+		return &s.Answers
+	case "Email":
+		return &s.Email
+	case "Phone":
+		return &s.Phone
+	case "CreatedAt":
+		return &s.CreatedAt
 	case "LogAuthor":
 		return &s.LogAuthor
 	case "LogAction":
@@ -250,25 +282,33 @@ func (s *applicationLogRow) FieldPointerByName(fieldName string) interface{} {
 
 // String returns a string representation of this struct or record.
 func (s application) String() string {
-	res := make([]string, 5)
-	res[0] = "Id: " + reform.Inspect(s.Id, true)
-	res[1] = "UserId: " + reform.Inspect(s.UserId, true)
-	res[2] = "VacancyId: " + reform.Inspect(s.VacancyId, true)
-	res[3] = "Salary: " + reform.Inspect(s.Salary, true)
-	res[4] = "Employment: " + reform.Inspect(s.Employment, true)
-	return strings.Join(res, ", ")
-}
-func (s applicationLogRow) String() string {
 	res := make([]string, 9)
 	res[0] = "Id: " + reform.Inspect(s.Id, true)
 	res[1] = "UserId: " + reform.Inspect(s.UserId, true)
 	res[2] = "VacancyId: " + reform.Inspect(s.VacancyId, true)
 	res[3] = "Salary: " + reform.Inspect(s.Salary, true)
 	res[4] = "Employment: " + reform.Inspect(s.Employment, true)
-	res[5] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
-	res[6] = "LogAction: " + reform.Inspect(s.LogAction, true)
-	res[7] = "LogDate: " + reform.Inspect(s.LogDate, true)
-	res[8] = "LogComment: " + reform.Inspect(s.LogComment, true)
+	res[5] = "Answers: " + reform.Inspect(s.Answers, true)
+	res[6] = "Email: " + reform.Inspect(s.Email, true)
+	res[7] = "Phone: " + reform.Inspect(s.Phone, true)
+	res[8] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
+	return strings.Join(res, ", ")
+}
+func (s applicationLogRow) String() string {
+	res := make([]string, 13)
+	res[0] = "Id: " + reform.Inspect(s.Id, true)
+	res[1] = "UserId: " + reform.Inspect(s.UserId, true)
+	res[2] = "VacancyId: " + reform.Inspect(s.VacancyId, true)
+	res[3] = "Salary: " + reform.Inspect(s.Salary, true)
+	res[4] = "Employment: " + reform.Inspect(s.Employment, true)
+	res[5] = "Answers: " + reform.Inspect(s.Answers, true)
+	res[6] = "Email: " + reform.Inspect(s.Email, true)
+	res[7] = "Phone: " + reform.Inspect(s.Phone, true)
+	res[8] = "CreatedAt: " + reform.Inspect(s.CreatedAt, true)
+	res[9] = "LogAuthor: " + reform.Inspect(s.LogAuthor, true)
+	res[10] = "LogAction: " + reform.Inspect(s.LogAction, true)
+	res[11] = "LogDate: " + reform.Inspect(s.LogDate, true)
+	res[12] = "LogComment: " + reform.Inspect(s.LogComment, true)
 	return strings.Join(res, ", ")
 }
 
@@ -281,6 +321,10 @@ func (s *application) Values() []interface{} {
 		s.VacancyId,
 		s.Salary,
 		s.Employment,
+		s.Answers,
+		s.Email,
+		s.Phone,
+		s.CreatedAt,
 	}
 }
 func (s *applicationLogRow) Values() []interface{} {
@@ -301,6 +345,10 @@ func (s *application) Pointers() []interface{} {
 		&s.VacancyId,
 		&s.Salary,
 		&s.Employment,
+		&s.Answers,
+		&s.Email,
+		&s.Phone,
+		&s.CreatedAt,
 	}
 }
 func (s *applicationLogRow) Pointers() []interface{} {

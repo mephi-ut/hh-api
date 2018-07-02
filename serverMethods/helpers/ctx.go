@@ -8,7 +8,7 @@ import (
 func GetMe(c *gin.Context) m.UserI {
 	me, ok := c.Get("me")
 	if !ok {
-		panic(`"me" is not set :(`)
+		return nil
 	}
 	return me.(m.UserI)
 }

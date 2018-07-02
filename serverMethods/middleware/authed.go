@@ -2,27 +2,36 @@ package serverMethodsMiddleware
 
 import (
 	"database/sql"
+	"fmt"
+	"net/http"
+
 	m "github.com/mephi-ut/hh-api/models"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func Authed(c *gin.Context) {
+func TryAuthed(c *gin.Context) error {
 	nickname := c.GetString("userID");
 	if nickname == "" {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": `nickname == ""`})
-		c.Abort()
-		return
+		return fmt.Errorf(`nickname == ""`)
 	}
 	me, err := m.User.First(m.UserF{Nickname: nickname})
 	if err == sql.ErrNoRows {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found"})
-		c.Abort()
-		return
+		return fmt.Errorf("User not found")
 	}
 	if err != nil {
 		panic(err)
 	}
 	c.Set("me", me)
+	return nil
+}
+
+func Authed(c *gin.Context) {
+	err := TryAuthed(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		c.Abort()
+		return
+	}
+
 	c.Next()
 }
